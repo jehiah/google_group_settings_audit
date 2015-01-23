@@ -67,7 +67,7 @@ if __name__ == "__main__":
     tornado.options.define("client_secret")
     tornado.options.define("access_token")
     tornado.options.define("domain")
-    tornado.options.define("key", default="whoCanViewGroup", help="filter to only the following group value")
+    tornado.options.define("key", default="", help="filter to only the following group value (ie: whoCanViewGroup)")
     tornado.options.parse_command_line()
     
     o = tornado.options.options
