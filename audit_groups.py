@@ -4,6 +4,7 @@ from oauth2client.file import Storage
 import tornado.options
 import tornado.httpclient
 import json
+import argparse
 
 # GET https://www.googleapis.com/admin/directory/v1/groups?domain=domain name
 # &customer=my_customer or customerId&pageToken=pagination token
@@ -36,7 +37,13 @@ def get_access_token(client_id, client_secret):
 
     storage = Storage('creds.data')
 
-    credentials = tools.run(flow, storage)
+    flags = argparse.Namespace(
+        noauth_local_webserver=False,
+        auth_host_name="localhost", 
+        auth_host_port=[8080, 8090],
+        logging_level="INFO",
+        )
+    credentials = tools.run_flow(flow, storage, flags)
     return credentials.access_token
 
 def run(access_token, domain, filter_key):
